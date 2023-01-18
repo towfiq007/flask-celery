@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tasks</title>
+
+</head>
+
+<body>
+    <h1>Index.html page</h1>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf-8">
+    var socket = io('/test');
+    var socket = io();
+    socket.on('connect', function() {
+        socket.emit('client_event', 'Client connected');
+        console.log('Client is connected')
+    });
+    socket.on('alert_events', function(data_from_server) {
+        // socket.emit('alert_events', 'Client connected');
+        console.log(data_from_server)
+    });
+    function get_alert_updates(){
+        socket.emit('alert_events', 'Get alert updates');
+    }
+
+    setInterval(get_alert_updates, 5000);
+</script>
+</html>
